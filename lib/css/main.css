@@ -1,0 +1,24 @@
+
+#baner {
+	background-color: lightgray;
+	padding: 25px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+#footer {
+	background-color: lightgray;
+	padding: 2px;
+	text-align:right;
+	padding-right:20px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+#content {
+	margin-left: 20px;
+}
+
+.goright {
+	float:right;
+}
