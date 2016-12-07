@@ -44,7 +44,20 @@ else
 { // Jeśli $rekord istnieje
 if($rekord['password']==$pass) // czy hasło zgadza się z BD
 {
+setcookie($user, '1');
+$success = 1;
+	
+$_SESSION['user_id'] = $rekord['id'];
+$_SESSION['user_name'] = $rekord['user_name'];
 
+$result = mysqli_query($link, "SELECT successfull, timestamp FROM logi WHERE user_name='admin' ORDER BY id DESC LIMIT 1"); // pobranie z BD wiersza, w którym login=login z formularza
+$rekord2 = mysqli_fetch_array($result); // wiersza z BD, struktura zmiennej jak w BD
+
+if($rekord2['successfull'] == 0){
+	echo "<script type='text/javascript'>alert(";
+	echo "'Data ostatniego błędnego logowania: ".$rekord2['timestamp']."";
+	echo "')</script>";
+}
 
 // if(($rekord2['timestamp']) && ($wrong_login == 1)){
 	// $wrong_login == 0;
@@ -65,7 +78,21 @@ if($rekord['password']==$pass) // czy hasło zgadza się z BD
 }
 else
 {
-
+	$_SESSION['wrong_login'] = 1;
+	$counter = 0;
+	if(isset($_COOKIE["".$user.""])){
+			$counter = $_COOKIE["".$user.""] + 1;
+			setcookie($user, $counter);	
+			if($_COOKIE["".$user.""] >= 3){
+				echo "Konto zablokowane !<br>";
+				$blocked = 1;
+			}else{
+				
+			}
+	}else{
+		setcookie($user,'1');
+		$blocked = 0;
+	}
 	
 $success = 0;
 

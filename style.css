@@ -1,0 +1,5 @@
+div.img_holder div{
+  display: inline-block;
+  float: left;
+  border: 30px;
+}
